@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! - Urban Decor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            cursor: pointer;
+        }
+
+        /* Button hover effect */
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex flex-col items-center justify-center min-h-screen w-full p-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+            <div class="text-indigo-600 text-6xl mb-6">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-4 text-indigo-700">Thank You for Registering!</h2>
+            <p class="text-gray-700 text-lg mb-6">
+                Your Urban Decor account has been successfully created.
+            </p>
+            <p class="text-gray-600 mb-8">
+                You will receive a confirmation email shortly. You can now log in and start exploring our curated collections!
+            </p>
+
+            <a href="login-page.html"
+               class="btn-primary inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Log In Now
+            </a>
+
+            <p class="text-center text-sm text-gray-500 mt-8">
+                Redirecting to login page in <span id="countdown">5</span> seconds...
+            </p>
+            <a href="index.html" class="font-medium text-indigo-600 hover:text-indigo-800 transition duration-200 mt-4 block">
+                Or, return to Home Page
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Automatic redirection script
+        let countdownElement = document.getElementById('countdown');
+        let seconds = 5; // Countdown from 5 seconds
+
+        function updateCountdown() {
+            countdownElement.textContent = seconds;
+            if (seconds === 0) {
+                window.location.href = 'login-page.html'; // Redirect to login page
+            } else {
+                seconds--;
+                setTimeout(updateCountdown, 1000); // Update every second
+            }
+        }
+
+        // Start the countdown when the page loads
+        document.addEventListener('DOMContentLoaded', updateCountdown);
+    </script>
+</body>
+</html>
