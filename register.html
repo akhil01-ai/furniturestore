@@ -50,46 +50,25 @@
 
     <div class="flex flex-col items-center justify-center min-h-screen w-full p-4">
         <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-            <h2 class="text-3xl font-bold text-center mb-8 text-indigo-700">Create Your Urban Decor Account</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-indigo-700">Join Urban Decor</h2>
 
             <form id="registrationForm" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <input type="text" id="name" name="name" required
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                           placeholder="John Doe">
-                </div>
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <input type="email" id="email" name="email" required
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                            placeholder="you@example.com">
                 </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="password" name="password" required
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                           placeholder="Enter your password">
-                    <p id="password-hint" class="text-xs text-gray-500 mt-1">Minimum 8 characters, at least one uppercase, one lowercase, one number.</p>
-                </div>
-                <div>
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                           placeholder="Confirm your password">
-                    <p id="password-match-error" class="text-sm text-red-600 mt-1 hidden">Passwords do not match.</p>
-                </div>
-
+                
                 <button type="submit"
-                        class=" btn-primary w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                        class="btn-primary w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                     Register
-                    <a href="thankyou.html">
                 </button>
             </form>
 
             <p class="text-center text-sm text-gray-600 mt-6">
                 Already have an account?
-                <a href="" class="font-medium text-indigo-600 hover:text-indigo-800 transition duration-200">Log In</a>
+                <a href="login-page.html" class="font-medium text-indigo-600 hover:text-indigo-800 transition duration-200">Log In</a>
             </p>
         </div>
     </div>
@@ -104,9 +83,6 @@
 
     <script>
         const registrationForm = document.getElementById('registrationForm');
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirm-password');
-        const passwordMatchError = document.getElementById('password-match-error');
         const messageBox = document.getElementById('messageBox');
         const messageText = document.getElementById('messageText');
         const closeMessageBox = document.getElementById('closeMessageBox');
@@ -126,53 +102,21 @@
         registrationForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
 
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
+            const emailInput = document.getElementById('email');
             let isValid = true;
             let errorMessage = '';
 
-            // Password match validation
-            if (password !== confirmPassword) {
-                passwordMatchError.classList.remove('hidden');
+            // Basic email format validation
+            if (!emailInput.value.includes('@') || !emailInput.value.includes('.')) {
                 isValid = false;
-                errorMessage = 'Passwords do not match.';
-            } else {
-                passwordMatchError.classList.add('hidden');
-            }
-
-            // Password strength validation (example: min 8 chars, 1 uppercase, 1 lowercase, 1 number)
-            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                isValid = false;
-                if (errorMessage) errorMessage += '\n'; // Add newline if there's a previous error
-                errorMessage += 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.';
+                errorMessage = 'Please enter a valid email address.';
             }
 
             if (isValid) {
-                // Here, you would typically send data to a server
-                // For this demo, we'll just simulate a successful registration
-                showMessageBox('Registration successful! You can now log in.');
-                registrationForm.reset(); // Clear the form
-                // In a real application, you might redirect the user:
-                // window.location.href = 'login-page.html';
+                // Redirect to the thank you page upon successful registration
+                window.location.href = 'thankyou.html';
             } else {
                 showMessageBox('Registration failed: ' + errorMessage);
-            }
-        });
-
-        // Live password match check
-        confirmPasswordInput.addEventListener('keyup', () => {
-            if (passwordInput.value !== confirmPasswordInput.value && confirmPasswordInput.value !== '') {
-                passwordMatchError.classList.remove('hidden');
-            } else {
-                passwordMatchError.classList.add('hidden');
-            }
-        });
-        passwordInput.addEventListener('keyup', () => {
-             if (passwordInput.value !== confirmPasswordInput.value && confirmPasswordInput.value !== '') {
-                passwordMatchError.classList.remove('hidden');
-            } else {
-                passwordMatchError.classList.add('hidden');
             }
         });
     </script>
